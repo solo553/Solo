@@ -1,0 +1,10 @@
+#home {
+    text-align: center;
+}
+
+#home img {
+    border-radius: 10px;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
