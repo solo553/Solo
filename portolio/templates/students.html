@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Students | StudentDesk{% endblock %}
+{% block page_heading %}Students{% endblock %}
+{% block content %}
+<div class="page-intro"><p>View, search, add, update, and remove student records.</p><a class="btn btn-primary" href="{{ url_for('new_student') }}">＋ Add student</a></div>
+<section class="panel">
+  <form class="search-form" method="get" action="{{ url_for('students') }}">
+    <label class="search-box"><span>⌕</span><input type="search" name="q" value="{{ query }}" placeholder="Search name, admission no., email, phone or course…"></label>
+    <button class="btn btn-secondary" type="submit">Search</button>
+    {% if query %}<a class="btn btn-plain" href="{{ url_for('students') }}">Clear</a>{% endif %}
+  </form>
+  <div class="table-wrap"><table><thead><tr><th>STUDENT</th><th>ADMISSION NO.</th><th>COURSE / PROGRAM</th><th>EMAIL</th><th>PHONE</th><th>ACTIONS</th></tr></thead><tbody>
+  {% for student in students %}
+  <tr>
+    <td><div class="person-cell"><span class="person-avatar">{{ student.full_name[:1]|upper }}</span><strong>{{ student.full_name }}</strong></div></td>
+    <td>{{ student.admission_no }}</td><td>{{ student.course or "—" }}</td><td>{{ student.email or "—" }}</td><td>{{ student.phone or "—" }}</td>
+    <td><div class="actions"><a class="action-link" href="{{ url_for('edit_student', student_id=student.id) }}">Edit</a>
+      <form method="post" action="{{ url_for('delete_student', student_id=student.id) }}" onsubmit="return confirm('Delete this student record? This cannot be undone.');"><button class="action-link danger-link" type="submit">Delete</button></form>
+    </div></td>
+  </tr>
+  {% else %}
+  <tr><td colspan="6"><div class="empty-state compact"><h3>No students found</h3><p>{% if query %}Try a different search term.{% else %}Add your first student record to get started.{% endif %}</p></div></td></tr>
+  {% endfor %}
+  </tbody></table></div>
+  <div class="table-foot">Showing {{ students|length }} record(s){% if query %} matching “{{ query }}”{% endif %}.</div>
+</section>
+{% endblock %}

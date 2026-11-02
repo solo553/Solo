@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ mode }} student | StudentDesk{% endblock %}
+{% block page_heading %}{{ mode }} student{% endblock %}
+{% block content %}
+<div class="page-intro"><p>Enter the student's details below. Fields marked * are required.</p><a class="btn btn-plain" href="{{ url_for('students') }}">← Back to students</a></div>
+<section class="panel form-panel">
+  <div class="panel-heading"><div><span class="eyebrow">STUDENT RECORD</span><h2>{{ mode }} student information</h2></div><span class="form-badge">● Basic details</span></div>
+  <form method="post" class="student-form">
+    <div class="form-grid">
+      <label>Admission number *<input name="admission_no" required maxlength="40" value="{{ student.get('admission_no', '') }}" placeholder="e.g. STU-2026-001"></label>
+      <label>Full name *<input name="full_name" required maxlength="120" value="{{ student.get('full_name', '') }}" placeholder="Enter full name"></label>
+      <label>Email address<input type="email" name="email" maxlength="120" value="{{ student.get('email', '') }}" placeholder="student@example.com"></label>
+      <label>Phone number<input type="tel" name="phone" maxlength="40" value="{{ student.get('phone', '') }}" placeholder="e.g. 07xx xxx xxx"></label>
+      <label class="full-field">Course / program<input name="course" maxlength="120" value="{{ student.get('course', '') }}" placeholder="e.g. Diploma in Computer Science"></label>
+    </div>
+    <div class="form-actions"><a class="btn btn-plain" href="{{ url_for('students') }}">Cancel</a><button class="btn btn-primary" type="submit">{{ mode }} student</button></div>
+  </form>
+</section>
+{% endblock %}

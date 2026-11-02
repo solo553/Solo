@@ -1,0 +1,4 @@
+{% extends "base.html" %}
+{% block title %}Page not found | StudentDesk{% endblock %}
+{% block page_heading %}Page not found{% endblock %}
+{% block content %}<section class="panel empty-state"><h2>We couldn't find that page.</h2><p>The page may have moved or the record may no longer exist.</p><a class="btn btn-primary" href="{{ url_for('dashboard') }}">Return to dashboard</a></section>{% endblock %}
